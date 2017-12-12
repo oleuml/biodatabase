@@ -6,4 +6,7 @@
 ## You can use the SQLite Browser
 ### On Arch Linux
     $ yaourt -S sqlitebrowser
+### On Mac OS
+    $ brew cask install db-browser-for-sqlite
+    
 
