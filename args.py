@@ -78,7 +78,6 @@ if args.output_dir != None:
     OUT_DIR = args.output_dir[0]
     if not OUT_DIR.endswith('/'):
         OUT_DIR += '/'
-
 else:
     OUT_DIR = 'out/'
 if not os.path.exists(OUT_DIR):

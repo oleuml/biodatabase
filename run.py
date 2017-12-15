@@ -35,7 +35,7 @@ result_variant = '{}variant_start_stop_model.csv'.format(OUT_DIR)
 header_model = ['model', 'start_pos', 'stop_pos']
 header_variant = ['variant_pos', 'start_pos', 'stop_pos', 'model']
 
-## ANNOTATIONS FILE PATHS (INPUT/OUTPUT) ##
+## ANNOTATIONS FILE PATHS OUTPUT ##
 annotation_output_file = '{}{}_annotations.csv'.format(OUT_DIR, CHR_NAME)
 
 ## EXECUTION ##
