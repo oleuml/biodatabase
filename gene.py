@@ -1,6 +1,6 @@
 import csv
-from collections import Sequence, Iterable
-import copy
+from collections import Sequence
+from tqdm import tqdm
 
 GENE = 0
 EXON = 1
@@ -149,7 +149,7 @@ def find_genecodes(input_file, output_file, chr_n, header):
         # For labeling all region types that are not relevant.
     data = []
     with open(input_file, 'r') as f:
-        for line in f:
+        for line in tqdm(f):
             # Filter whether line begins with chr7, ignore the rest.
             line_splitted = line.split()
             if(line_splitted[:1][0] == chr_n):

@@ -1,5 +1,6 @@
 import csv
 from collections import Sequence
+from tqdm import tqdm
 
 class SNP(Sequence):
     def __init__(self, start, stop, name, strand, refNCBI, observed):
@@ -71,7 +72,7 @@ def extract_single_snp(input_file, output_file, chr_n):
             i += 1
 
 
-        for line in f:
+        for line in tqdm(f):
             line = line.split()
             if line[CHROM] != chr_n or line[STRAND] != '+' or line[MOLTYPE] != 'genomic' or line[CLASS] != 'single':
                 continue
