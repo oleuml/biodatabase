@@ -142,7 +142,7 @@ class Gene(Sequence):
         data.append(new_exon)
         return data
 
-def find_genecodes(input_file, output_file, chr_n, header):
+def extract_genecodes(input_file, output_file, chr_n, header):
     # Create dictionary for saving space.
     # TODO: CDS, UTR = introns = i; exons = e; stop_codon, gene
     lookup = {'gene' : GENE, 'exon' : EXON}
