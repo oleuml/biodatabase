@@ -70,11 +70,10 @@ def extract_single_snp(input_file, output_file, chr_n):
                 CLASS = i
             i += 1
 
-        
 
         for line in f:
             line = line.split()
-            if line[CHROM] != chr_n or line[MOLTYPE] != 'genomic' or line[CLASS] != 'single':
+            if line[CHROM] != chr_n or line[STRAND] != '+' or line[MOLTYPE] != 'genomic' or line[CLASS] != 'single':
                 continue
             start = int(line[START])
             stop = int(line[STOP])
