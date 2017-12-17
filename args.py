@@ -84,13 +84,9 @@ if not os.path.exists(OUT_DIR):
     os.makedirs(OUT_DIR)
 
 
-if args.finding:
+if args.all or args.finding:
     FINDING = True
-if args.creating:
+if args.all or args.creating:
     CREATING = True
-if args.database:
-    DATABASE = True
-if args.all:
-    FINDING = True
-    CREATING = True
+if args.all or args.database:
     DATABASE = True
