@@ -75,9 +75,19 @@ class Gene(Sequence):
         return len(self.exons) + len(self.introns) + (0 if self.promoter == None else 1) + 1
 
     def add_exon(self, exon):
+        '''Add exon to gene. After one or multiple exons be added then is an update needed
+        Keyword arguments:
+        exon -- Item exon
+        '''
+        if type(exon) != Item:
+            raise TypeError('Exon must be type of Item')
+        if exon.type != EXON:
+            raise TypeError('ExonItem is not type of EXON')
         self.exons.append(exon)
 
     def update(self):
+        '''Needed if new exons be added. Execute the merging of exons and
+           the generating of promoter and introns'''
         if self.exons == []:
             raise Exception('No Exons available.')
         self.merge_exons()
@@ -105,6 +115,7 @@ class Gene(Sequence):
         self.introns = introns
 
     def generate_promoter(self):
+        '''Generate the promoter of the gene and set the promoter.'''
         exon = self.exons[0]
         start = exon.start
         self.promoter = Item(PROMOTER, start-500, start, self.level) #TODO: stop from Promoter
@@ -144,38 +155,44 @@ class Gene(Sequence):
 
 def extract_genecodes(input_file, output_file, chr_n, header):
     # Create dictionary for saving space.
-    # TODO: CDS, UTR = introns = i; exons = e; stop_codon, gene
     lookup = {'gene' : GENE, 'exon' : EXON}
-        # For labeling all region types that are not relevant.
-    data = []
+
+    CHROM = 0
+    TYPE = 2
+    START = 3
+    END = 4
+
+    items = []
     with open(input_file, 'r') as f:
         for line in tqdm(f):
-            # Filter whether line begins with chr7, ignore the rest.
-            line_splitted = line.split()
-            if(line_splitted[:1][0] == chr_n):
+            # Filter whether line begins with chr_n, ignore the rest.
+            line = line.split()
+            if(line[CHROM] == chr_n):
                 
-                type_of_region = line_splitted[2:3][0] # exon, intron, promoter, ...
-                if type_of_region == 'exon' or type_of_region == 'gene':
-                    type_of_region = lookup[type_of_region]
-                else:
+                typ = line[TYPE]
+                # Ignoring other types than exon and gene
+                if typ != 'exon' and typ != 'gene':
                     continue
-                start_pos = line_splitted[3:4][0] # start position
-                end_pos = line_splitted[4:5][0] # end position
+                typ = lookup[typ] # type number
+                start_pos = line[START] # start position
+                end_pos = line[END] # end position
 
-                for index, item in enumerate(line_splitted):
+                # Searching level
+                for index, i in enumerate(line):
                     next = index + 1
-                    if(item == 'level'):
-                        level = int(line_splitted[next][0])
+                    if(i == 'level'):
+                        level = int(line[next][0])
 
+                # Checking level
                 if level != 1 and level != 2:
                     continue
 
-                data_line = Item(type_of_region, int(start_pos), int(end_pos)) #, level) #TODO LEVELS
-                data.append(data_line)
+                item = Item(typ, int(start_pos), int(end_pos)) #, level) #TODO LEVELS
+                items.append(item)
 
     genes = []
     i = -1
-    for code in data:
+    for code in items:
         if code.type == GENE:
             genes.append(Gene(code.start, code.stop, code.level))
             i += 1
@@ -186,7 +203,7 @@ def extract_genecodes(input_file, output_file, chr_n, header):
     for gene in genes:
         gene.update()
 
-    # Write data into csv file.
+    # Write genes into csv file.
     with open(output_file, 'w', newline = '') as csv_f:
         writer = csv.writer(csv_f)
         writer.writerow(header)
