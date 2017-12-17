@@ -6,7 +6,8 @@ import sys
 from args import *
 from model_to_pos import model_to_pos
 from pos_to_indexed import creating_indexed_models, creating_indexed_annotations
-from regex_annotation import extract_annotations
+from find_genecodes import find_genecodes
+#from regex_annotation import extract_annotations
 from regex_chromosome import finding_patterns
 from db import make_sql_database
 
@@ -34,7 +35,7 @@ result_variant = '{}variant_start_stop_model.csv'.format(OUT_DIR)
 ## HEADERS ##
 header_model = ['model', 'start_pos', 'stop_pos']
 header_variant = ['variant_pos', 'start_pos', 'stop_pos', 'model']
-
+header_annotation = ['type', 'start', 'stop', 'level']
 ## ANNOTATIONS FILE PATHS OUTPUT ##
 annotation_output_file = '{}{}_annotations.csv'.format(OUT_DIR, CHR_NAME)
 
@@ -55,10 +56,11 @@ if FINDING:
     print("Finished extracting positions of variants from \"{}\".".format(CHR_FILE))
 
     print("Extracting annotations from \"{}\".".format(ANN_FILE))
-    extract_annotations(
+    find_genecodes(
         input_file=ANN_FILE,
         output_file=annotation_output_file,
-        chr_n=CHR_NAME)
+        chr_n=CHR_NAME,
+        header=header_annotation)
     print("Finished extracting annotations from \"{}\".".format(ANN_FILE))
 
 ################################################################################
@@ -92,12 +94,13 @@ if CREATING:
         output_file=result_file_model,
         header=header_model)
     print("Finished creating all indices with corresponding models.")
-    print("Creating all indices with corresponding annotations.")
-    creating_indexed_annotations(
-        input_file=annotation_file,
-        output_file=result_file_region,
-        header=header_annotation)
-    print("Finished creating all indices with corresponding annotations.")
+    # TODO: Could be deleted?
+    #print("Creating all indices with corresponding annotations.")
+    #creating_indexed_annotations(
+    #    input_file=annotation_file,
+    #    output_file=result_file_region,
+    #    header=header_annotation)
+    #print("Finished creating all indices with corresponding annotations.")
 
 ################################################################################
 #### CREATING DATABASE TABLES ####
