@@ -97,8 +97,9 @@ class Gene(Sequence):
         stop = self.gene.stop
         for exon in exons[1:]:
             stop = exon.start
-            intron = Item(INTRON, start, stop, self.level)
-            introns.append(intron)
+            if start+1 <= stop-1:
+                intron = Item(INTRON, start+1, stop-1, self.level)
+                introns.append(intron)
             start = exon.stop
             # TODO: Gene end last intron??
         self.introns = introns
