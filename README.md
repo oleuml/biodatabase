@@ -16,7 +16,7 @@ Also needed `SNPs` from http://genome.ucsc.edu/cgi-bin/hgTables with following c
 - track: Common SNPs
 - region: genome
 - output format: selected fields from primary and related tables
-- output file: chr.snp
+- output file: `chr.snp`
 
 And columns/fields (if you are clicking `"get output"`):
 - chrom
