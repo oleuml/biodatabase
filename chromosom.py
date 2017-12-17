@@ -14,7 +14,7 @@ import re
 import csv
 from tqdm import tqdm
 
-def find_patterns(input_file, output_file, header, patterns):
+def extract_patterns(input_file, output_file, header, patterns):
     with open(input_file, 'r') as f:
 
         # Ignore first line (description of sequence).
