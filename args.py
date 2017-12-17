@@ -69,7 +69,7 @@ if args.snp_file != None:
     SNP_FILE = args.snp_file[0]
 else:
     for file in os.listdir(RES_DIR):
-        if file.endswith(''): # TODO: add SNP file end
+        if file.endswith('.snp'):
             SNP_FILE = '{}{}'.format(RES_DIR, file)
 check_exist(SNP_FILE)
 

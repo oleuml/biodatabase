@@ -6,8 +6,8 @@ import sys
 from args import *
 from model_to_pos import model_to_pos
 from pos_to_indexed import creating_indexed_models, creating_indexed_annotations
-from find_genecodes import find_genecodes
-#from regex_annotation import extract_annotations
+from gene import find_genecodes
+from snp import extract_single_snp
 from regex_chromosome import finding_patterns
 from db import make_sql_database
 
@@ -38,6 +38,7 @@ header_variant = ['variant_pos', 'start_pos', 'stop_pos', 'model']
 header_annotation = ['type', 'start', 'stop', 'level']
 ## ANNOTATIONS FILE PATHS OUTPUT ##
 annotation_output_file = '{}{}_annotations.csv'.format(OUT_DIR, CHR_NAME)
+snp_output_file = '{}{}_snp.csv'.format(OUT_DIR, CHR_NAME)
 
 ## EXECUTION ##
 if FINDING:
@@ -54,7 +55,7 @@ if FINDING:
         header=header_variant,
         patterns=model1_variants)
     print("Finished extracting positions of variants from \"{}\".".format(CHR_FILE))
-
+    
     print("Extracting annotations from \"{}\".".format(ANN_FILE))
     find_genecodes(
         input_file=ANN_FILE,
@@ -62,6 +63,13 @@ if FINDING:
         chr_n=CHR_NAME,
         header=header_annotation)
     print("Finished extracting annotations from \"{}\".".format(ANN_FILE))
+
+    print("Extracting snp from \"{}\"".format(SNP_FILE))
+    extract_single_snp(
+        input_file=SNP_FILE,
+        output_file=snp_output_file,
+        chr_n=CHR_NAME)
+    print("Finished extracting snp from \"{}\"".format(SNP_FILE))
 
 ################################################################################
 #### CREATING ALL INDICES WITH CORRESPONDING ANNOTATIONS & MODELS ####
