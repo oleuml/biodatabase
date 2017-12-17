@@ -11,16 +11,14 @@ CHR_FILE = None
 SNP_FILE = None
 ANN_FILE = None
 
-FINDING = False
-CREATING = False
+EXTRACTING = False
 DATABASE = False
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--chrnum', nargs=1, metavar='NUM', type=int, choices=range(1,23), help='set number (1-22) of the chromosom', required=True)
-parser.add_argument('-a', '--all', help='run all: --finding, --creating, --database', action='store_true')
-parser.add_argument('--finding', help='find all positions of patterns', action='store_true')
-parser.add_argument('--creating', help='create all indices with corresponding annotations and models', action='store_true')
-parser.add_argument('--database', help='create the database tables', action='store_true')
+parser.add_argument('-a', '--all', help='run all: --extracting, --database', action='store_true')
+parser.add_argument('-e', '--extracting', help='find all positions of patterns', action='store_true')
+parser.add_argument('-d', '--database', help='create the database tables', action='store_true')
 
 parser.add_argument('--resource-dir', nargs=1, metavar='PATH',help='set the folder of all resource files: chr<NUM>.fa gencode.v<VERSION>.annotation.gtf')
 parser.add_argument('--chr-file', nargs=1, metavar='FILE', help='set the file path of the chromosom fasta-file. Isn\'t needed if the file in the resource folder.')
@@ -84,9 +82,7 @@ if not os.path.exists(OUT_DIR):
     os.makedirs(OUT_DIR)
 
 
-if args.all or args.finding:
-    FINDING = True
-if args.all or args.creating:
-    CREATING = True
+if args.all or args.extracting:
+    EXTRACTING = True
 if args.all or args.database:
     DATABASE = True
