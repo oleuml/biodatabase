@@ -88,7 +88,7 @@ def extract_single_snp(input_file, output_file, chr_n):
 
     with open(output_file, 'w', newline = '') as csv_f:
         writer = csv.writer(csv_f)
-        header = ['start', 'stop', 'name', 'start', 'refNCBI', 'observed']
+        header = ['start', 'stop', 'name', 'strand', 'refNCBI', 'observed']
         writer.writerow(header)
         for snp in data:
             writer.writerow(snp)
