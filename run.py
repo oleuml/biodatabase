@@ -7,6 +7,7 @@ from chromosom import extract_patterns
 from database import make_sql_database
 from gene import extract_genecodes
 from snp import extract_single_snp
+from identification_tables import out_id_tables
 
 ################################################################################
 #### EXTRACTING ALL POSITIONS OF PATTERNS, ALL GENECODES and ALL SNPs ####
@@ -76,7 +77,7 @@ if DATABASE:
         out_model,
         out_variant,
         out_annotation,
-        out_snp]
+        out_snp] + out_id_tables
     print('Creating \"{}\".'.format(database))
     make_sql_database(
         db_name=database,
