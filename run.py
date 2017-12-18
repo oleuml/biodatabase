@@ -20,7 +20,7 @@ models = [
 model1_variants = [
     r'(A|G|T)ACGTG',
     r'C(C|G|T)CGTG',
-    r'CA(A|G|T)TG',
+    r'CA(A|G|T)GTG',
     r'CAC(A|C|T)TG',
     r'CACG(A|C|G)G',
     r'CACGT(A|C|T)']
