@@ -73,6 +73,7 @@ def extract_single_snp(input_file, output_file, chr_n):
                 CLASS = i
             i += 1
 
+        amino = {'A' : 0, 'C' : 1, 'G' : 2, 'T' : 3}
 
         for line in tqdm(f):
             line = line.split()
@@ -80,12 +81,12 @@ def extract_single_snp(input_file, output_file, chr_n):
                 continue
             start = int(line[START])
             stop = int(line[STOP])
-            if stop - start == 0 or stop - start == 1:
+            if stop - start == 1 and line[REFNCBI] in amino:
                 data.append(SNP(start=int(line[START]),
                                 stop=int(line[STOP]),
                                 name=line[NAME],
                                 strand=line[STRAND],
-                                refNCBI=line[REFNCBI],
+                                refNCBI=amino[line[REFNCBI]],
                                 observed=line[OBSERVED]))
 
     with open(output_file, 'w', newline = '') as csv_f:
