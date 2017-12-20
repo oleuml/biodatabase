@@ -39,6 +39,8 @@ def extract_single_snp(input_file, output_file, chr_n):
         headline = f.readline()
 
         headline = headline.split()
+        if headline[0].startswith('#'):
+            headline[0] = headline[0][1:]
         i = 0
         CHROM = -1
         START = -1
@@ -51,7 +53,7 @@ def extract_single_snp(input_file, output_file, chr_n):
         CLASS = -1
 
         for item in headline:
-            if item == '#chrom':
+            if item == 'chrom':
                 CHROM = i
             elif item == 'chromStart':
                 START = i
