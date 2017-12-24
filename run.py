@@ -34,7 +34,7 @@ out_snp = '{}{}_snp.csv'.format(OUT_DIR, CHR_NAME)
 
 ## HEADERS ##
 header_model = ['model', 'start', 'stop']
-header_variant = ['variant', 'start', 'stop', 'model']
+header_variant = ['variant', 'start', 'stop']
 header_annotation = ['type', 'start', 'stop', 'level']
 
 ## EXECUTION ##

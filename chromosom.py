@@ -27,5 +27,4 @@ def extract_patterns(input_file, output_file, header, patterns):
                 # Find the corresponding pattern (ignoring lower/upper cases).
                 it = re.finditer(pattern, data, re.IGNORECASE)
                 for match_object in tqdm(it):
-                    # TODO: Warum count + 1???
-                    writer.writerow([count+1, match_object.start(), match_object.end()])
+                    writer.writerow([count, match_object.start(), match_object.end()])
