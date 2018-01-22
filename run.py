@@ -19,12 +19,24 @@ models = [
     r'TGA(C|G)TCA',
     r'CCAAT|ATTGG']
 model1_variants = [
-    r'(A|G|T)ACGTG',
-    r'C(C|G|T)CGTG',
-    r'CA(A|G|T)GTG',
-    r'CAC(A|C|T)TG',
-    r'CACG(A|C|G)G',
-    r'CACGT(A|C|T)']
+    r'AACGTG',
+    r'GACGTG',
+    r'TACGTG',
+    r'CCCGTG',
+    r'CGCGTG',
+    r'CTCGTG',
+    r'CAAGTG',
+    r'CAGGTG',
+    r'CATGTG',
+    r'CACATG',
+    r'CACCTG',
+    r'CACTTG',
+    r'CACGAG',
+    r'CACGCG',
+    r'CACGGG',
+    r'CACGTA',
+    r'CACGTC',
+    r'CACGTT']
 
 ## OUTPUT FILES ##
 out_model = '{}{}_models.csv'.format(OUT_DIR, CHR_NAME)

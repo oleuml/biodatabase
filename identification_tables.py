@@ -38,7 +38,7 @@ modelIDs = [
 
 write_csv_table(out_id_tables[1], modelIDs_header, modelIDs)
 
-variantIDs_header = ['id', 'name', 'pos', 'model']
+variantIDs_header = ['id', 'name', 'pos', 'model', 'fullname']
 variantIDs = []
 # Generates the variations of model CACGTG:
 id = 0
@@ -46,7 +46,11 @@ for pos, x in enumerate(modelIDs[0][1]):
     for a in ['A', 'C', 'G', 'T']:
         if a == x:
             continue
-        variantIDs.append([id, amino[a], pos, modelIDs[0][0]])
+        fullname = list('' + modelIDs[0][1])
+        fullname[pos] = a
+        fullname = ''.join(fullname)
+
+        variantIDs.append([id, amino[a], pos, modelIDs[0][0], fullname])
         id += 1
 
 write_csv_table(out_id_tables[2], variantIDs_header, variantIDs)
